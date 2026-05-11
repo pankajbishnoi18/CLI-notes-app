@@ -1,6 +1,3 @@
-note1="hey there this is the first note"
-note2="this is the second one"
-existing_notes=[note1,note2]  
 
 j=1
 while j>0:
@@ -12,33 +9,39 @@ while j>0:
     print("press 16 to exit the app")
     i=int(input())
     if i==1:
-    
-        print("now type whatver you want to write")
-        text=input()
-        note3=text
-        print("do you want to save the note to the existing notes ,answer in yes or no only")
-        resp=input()
-        if resp=="yes":
-           existing_notes.append(note3)
-           print("saved successfully")
-        if resp=="no":
-           continue
+        print("write the note......")
+        new_note=input()
+
+
+        with open("notes.txt","a") as file:
+            file.write(new_note + "\n")
+
+
+        
            
     if i==2:
-     for k in range(len(existing_notes)):
-        print(f"{k+1}--{existing_notes[k]}")
+       with open("notes.txt","r") as file:
+          saved_notes=file.readlines()
+       print(saved_notes)
     print("_______________________________________________________________________________________________________")
     print("_______________________________________________________________________________________________________")
     if i==16:
          break
     if i==20:
-        for k in range(len(existing_notes)):
-           print(f"{k+1}--{existing_notes[k]}")
-        print("enter the number of the note which you want to delete")
-        d=int(input())
-        existing_notes.pop(d-1)
-        print(f"note no {d} is deleted successfully")
+        with open("notes.txt","r") as file:
+          saved_notes=file.readlines()
+        for index,note in enumerate(saved_notes):
+            print(f"{index+1}--{note}")
+        print("enter the number of the note you want to delete")
+        res=int(input())
+        saved_notes.pop(res-1)
+        with open("notes.txt","w" ) as file:
+            file.writelines(saved_notes)
+        print("deleted successfuly")
+        
 
+        
+        
 
 
 
